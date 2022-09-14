@@ -1,0 +1,104 @@
+DB advantages: 
+  • More secure
+  • Store more data
+  • Many users can write queries to gather insights from the data at the same time.
+    --> when a db is queried, the data stored does not change; rather, the db info is accessed and presented according to instructions in the query.
+
+Rows -> Records, Columns -> Fields
+fields naming convention: lowercase, underscore instead of space, singular, never share name with the table tehy are housed in
+key: aka primary key, an unique id
+
+strings: can store up to 250 chars, VARCHAR can store up to thousands of chars
+int: can store less than -2b and more than 2b 
+NUMERIC: float type, could store up to 38 digits
+schema: blueprint of database, it shows the bd's design (show datatype of each field and relationship between tables)
+
+AS: Aliasing, rename columns 
+DISTINCT: having multiple fields returns all distinct combinations of the fields
+View: A vitual *table* that is the result of a saved SQL SELECT statement
+  ex: CREATE VIEW <view_name> AS
+      SELECT <fields> FROM <table>;
+
+Relational Database (RDB):
+  • real-lif entities become tables
+  • reduced redundancy
+  • data integrity by relationships
+  * constraints, keys, referential integrity *
+
+An information_schema is a meta-database that holds information about your current database (tables, views, columns and procedures). 
+You can query it with SELECT * FROM syntax.
+
+Entity relationship diagram, rectangle -> entity types, circles connected to the rectangle -> attributes (columns)
+Creating a new table:
+  CREATE TABLE <table_name>(
+    <column_name> <data_type>,
+    <column_name> <data_type>,
+    ...
+  );
+  
+Adding column to table:
+  ALTER TABLE <table_name>
+  ADD COLUMN <column_name> <data_type>;
+Renaming column in table:
+  ALTER TABLE <table_name>
+  RENAME COLUMN <old_name> TO <new_name>;
+Drop a column in table:
+  ALTER TABLE <table_name>
+  DROP COLUMN <column_name>;
+Alter types after table creation:
+  ALTER TABLE <table_name>
+  ALTER COLUMN <column_name>
+  TYPE <data_type>;
+Only store DISTINCT data in the new tables:
+  INSERT INTO <table_name>
+  SELECT DISTINCT <fields>
+  FROM <table_name>;
+Normally we use the INSERT INTO statement like this:
+  INSERT INTO <table_name> (<column_a>, <column_b>)
+  VALUES (<value_a>, <value_b>);
+
+Integrity Constraints:
+  • Attribute constraints, e.g. data types on columns
+  • Key contraints, e.g. primary keys
+  • Referential integrity constraints, enforced through foreign keys
+Why Constrainst?
+  • give the data a structure to follow
+  • help with consistency, thus data quality
+  • data quality is a business advantage / data science prerequisite 
+  • Enforcing is difficult but PostgreSQL helps
+
+CAST(<column_name> AS <data_type>) --> type casting
+
+Data Types:
+  • Enforced on columns
+  • Define the domain of a column
+  • Define what operations are possible
+  • Enforce consistent storage of values
+  Most common types:
+    • text: character strings of any length
+    • varchar(n): a maximum of n characters
+    • char(n): a fiexed-length string of n characters
+    • boolean: TRUE, FALSE or NULL
+    • date, time, timestamp: various formats for date and time calculations
+    • numeric: arbitrary precision numbers
+    • integer: whole numbers in the range of approx -2b and +2b
+SUBSTRING(<string> FROM 1 FOR x) --> truncate string
+
+not-null constraint:
+  • disallow NULL values in a certain column
+  • must hold true for the current state
+  • must hold true for any future state
+NULL:
+  • unknown value
+  • does not exist
+  • does not apply
+  and so on ...
+<column_name> <data_type> NOT NULL
+SET NOT NULL or DROP NOT NULL
+
+unique constraint:
+  • disallow duplicate values in a column
+  • must hold true for the current state
+  • must hold true for the future state
+ADD CONSTRAINT <constraint_name> UNIQUE(<column_name>)
+  
