@@ -101,4 +101,14 @@ unique constraint:
   • must hold true for the current state
   • must hold true for the future state
 ADD CONSTRAINT <constraint_name> UNIQUE(<column_name>)
-  
+
+Surrogate keys: 
+  An artificial primary key. In other words, they are not based on a native column in your data, 
+  but on a column that just exists for the sake of having a primary key.
+
+REFERENCES (foreign_pkey) ON DELETE:
+  NO ACTION: Throw an error
+  CASCADE: Delete all referencing records
+  RESTRICT: Throw an error
+  SET NULL: set the referencing column to NULL
+  SET DEFAUL: set the referencing column to the defaul value (if set)
